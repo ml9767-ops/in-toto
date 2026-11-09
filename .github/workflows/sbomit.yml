@@ -1,7 +1,8 @@
 name: SBOMit Test
 
 on:
-  workflow_dispatch:
+  push:
+  pull_request:
 
 permissions:
   contents: read
@@ -24,10 +25,5 @@ jobs:
       - name: Install build frontend
         run: python -m pip install build
 
-      - name: Build under SBOMit
-        uses: Uk-jake/sbomit-pipeline-runner@main
-        with:
-          build-command: |
-            python -m build --wheel
-          sbom-format: spdx23
-          use-syft: true
+      - name: Build
+        run: python -m build
